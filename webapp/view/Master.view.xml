@@ -1,0 +1,18 @@
+<mvc:View
+	controllerName="acceptpurchaseorder.controller.Master"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0"
+>
+
+<Page>
+<content>
+    <List mode="SingleSelectMaster" growing="true">
+        
+
+    </List>
+</content>
+</Page>
+</mvc:View>
