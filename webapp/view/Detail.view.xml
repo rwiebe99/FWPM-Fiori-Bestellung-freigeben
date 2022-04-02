@@ -7,4 +7,10 @@
 	busyIndicatorDelay="0"
 >
 
+<Page>
+	<content>
+		<Text text="Hallo"></Text>
+	</content>
+</Page>
+
 </mvc:View>
