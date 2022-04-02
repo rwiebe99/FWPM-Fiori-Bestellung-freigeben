@@ -8,7 +8,20 @@
         <App id="app">
             <pages>
                 <Page id="page" title="{i18n>title}">
-                    <content />
+                    <content>
+                        <Text
+                            renderWhitespace="false"
+                            text="empty string"
+                            textAlign="Begin"
+                            textDirection="Inherit"
+                            width=""
+                            wrapping="true"
+                            wrappingType="Normal"
+                        >
+                            
+                        </Text>
+                    </content>
+
                 </Page>
             </pages>
         </App>
