@@ -107,10 +107,10 @@
       }
     },
     "rootView": {
-      "viewName": "acceptpurchaseorder.view.View",
+      "viewName": "acceptpurchaseorder.view.App",
       "type": "XML",
       "async": true,
-      "id": "View"
+      "id": "App"
     }
   }
 }
