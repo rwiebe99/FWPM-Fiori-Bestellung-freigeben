@@ -1,16 +1,22 @@
 <mvc:View
-	controllerName="acceptpurchaseorder.controller.Detail"
-	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m"
-	displayBlock="true"
-	height="100%"
-	busyIndicatorDelay="0"
->
-
-<Page>
-	<content>
-		<Text text="Hallo"></Text>
-	</content>
-</Page>
-
+	xmlns:layout="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc"
+	controllerName="acceptpurchaseorder.controller.Detail">
+	<Page
+		title="{orderName}"
+		navButtonPress="onNavBack"
+		showNavButton="{device>/system/phone}">
+		<content>
+					<List id="products" 
+						items="{products}"
+						headerText="Products">
+					<items>
+						<StandardListItem title="{productName}" 
+							type="Active"
+							press="onSelectionChange"/>
+					</items>
+				</List>
+		</content>
+	</Page>
 </mvc:View>

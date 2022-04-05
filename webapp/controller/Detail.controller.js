@@ -1,85 +1,33 @@
-sap.ui.define(["sap/ui/core/mvc/Controller",
-	"sap/m/MessageBox",
-	"./utilities",
-	"sap/ui/core/routing/History"
-], function(BaseController, MessageBox, Utilities, History) {
+sap.ui.define( ["sap/ui/core/mvc/Controller","sap/ui/core/routing/History", "sap/ui/Device"], function (Controller, History, Device) {
 	"use strict";
 
-	return BaseController.extend("acceptpurchaseorder.controller.DetailPage1", {
-		handleRouteMatched: function(oEvent) {
-			var sAppId = "App6245962e1cfbfb01d2318187";
+	return Controller.extend("acceptpurchaseorder.controller.Detail", {
+		onInit : function () {
+			this.getOwnerComponent().getRouter().getRoute("orderDetails").attachPatternMatched(this._onRouteMatched, this);
+		},
+		_onRouteMatched: function(oEvent) {
+			this._orderId = oEvent.getParameter("arguments").orderId;
+			this.getView().bindElement("/orders/" + this._orderId);
+		},
+		onSelectionChange: function(oEvent) {
+			var sProductId = oEvent.getSource().getBindingContext().getProperty("productId");
+			this.getOwnerComponent().getRouter()
+				.navTo("productDetails",
+					{orderId:this._orderId, productId: sProductId});
+		},
+		onNavBack : function() {
+			var sPreviousHash = History.getInstance().getPreviousHash();
 
-			var oParams = {};
-
-			if (oEvent.mParameters.data.context) {
-				this.sContext = oEvent.mParameters.data.context;
-
+			//The history contains a previous entry
+			if (sPreviousHash !== undefined) {
+				history.go(-1);
 			} else {
-				if (this.getOwnerComponent().getComponentData()) {
-					var patternConvert = function(oParam) {
-						if (Object.keys(oParam).length !== 0) {
-							for (var prop in oParam) {
-								if (prop !== "sourcePrototype" && prop.includes("Set")) {
-									return prop + "(" + oParam[prop][0] + ")";
-								}
-							}
-						}
-					};
-
-					this.sContext = patternConvert(this.getOwnerComponent().getComponentData().startupParameters);
-
-				}
+				// There is no history!
+				// Naviate to master page
+				this.getOwnerComponent().getRouter().navTo("master", {}, true);
 			}
-
-			var oPath;
-
-			if (this.sContext) {
-				oPath = {
-					path: "/" + this.sContext,
-					parameters: oParams
-				};
-				this.getView().bindObject(oPath);
-			}
-
-		},
-		_onButtonPress: function() {
-			return new Promise(function(fnResolve) {
-				sap.m.MessageBox.confirm("", {
-					title: "Bestellung freigegeben",
-					actions: ["", ""],
-					onClose: function(sActionClicked) {
-						fnResolve(sActionClicked === "");
-					}
-				});
-			}).catch(function(err) {
-				if (err !== undefined) {
-					MessageBox.error(err);
-				}
-			});
-
-		},
-		_onButtonPress1: function() {
-			alert("Belstellung abgelehnt");
-
-		},
-		onInit: function() {
-			this.oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			this.oRouter.getTarget("Detail").attachDisplay(jQuery.proxy(this.handleRouteMatched, this));
-			var oView = this.getView();
-			oView.addEventDelegate({
-				onBeforeShow: function() {
-					if (sap.ui.Device.system.phone) {
-						var oPage = oView.getContent()[0];
-						if (oPage.getShowNavButton && !oPage.getShowNavButton()) {
-							oPage.setShowNavButton(true);
-							oPage.attachNavButtonPress(function() {
-								this.oRouter.navTo("Master", {}, true);
-							}.bind(this));
-						}
-					}
-				}.bind(this)
-			});
-
 		}
+
 	});
-}, /* bExport= */ true);
+
+});

@@ -1,50 +1,19 @@
 <mvc:View
-	controllerName="acceptpurchaseorder.controller.Master"
-	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m"
-	displayBlock="true"
-	height="100%"
-	busyIndicatorDelay="0"
->
-
-<Page>
-<content>
-	<List mode="SingleSelectMaster" width="100%" headerText="Header" footerText="" backgroundDesign="Solid" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" visible="true">
-		<infoToolbar/>
-		<headerToolbar>
-			<Toolbar enabled="true" visible="true" width="" design="Solid">
-				<content>
-					<SearchField placeholder="Search" showSearchButton="true" visible="true" width="100%"/>
-				</content>
-			</Toolbar>
-		</headerToolbar>
-		<items>
-			<ObjectListItem intro="Purchase Order:" title="0000000001" number="200,00" numberUnit="USD" numberState="None" type="Active" selected="false">
-				<attributes>
-					<ObjectAttribute text="Angelegt am" active="false" visible="true"/>
-					<ObjectAttribute title="" text="Angelegt von" active="false" visible="true"/>
-				</attributes>
-				<firstStatus>
-					<ObjectStatus text="01.01.2022" state="None" visible="true"/>
-				</firstStatus>
-				<secondStatus>
-					<ObjectStatus text="Max Muster" state="None" visible="true"/>
-				</secondStatus>
-			</ObjectListItem>
-			<ObjectListItem intro="Purchase Order:" title="0000000002" number="10,00" numberUnit="USD" numberState="None" type="Active" selected="false">
-				<attributes>
-					<ObjectAttribute text="Angelegt am" active="false" visible="true"/>
-					<ObjectAttribute title="" text="Angelegt von" active="false" visible="true"/>
-				</attributes>
-				<firstStatus>
-					<ObjectStatus text="01.01.2022" state="None" visible="true"/>
-				</firstStatus>
-				<secondStatus>
-					<ObjectStatus text="Max Muster" state="None" visible="true"/>
-				</secondStatus>
-			</ObjectListItem>
-		</items>
-	</List>
-</content>
-</Page>
+	xmlns:layout="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc"
+	controllerName="acceptpurchaseorder.controller.Master">
+	<Page
+		title="Orders List">
+		<List id="orders" 
+				items="{/orders}"
+				mode="SingleSelectMaster"
+				selectionChange="onSelectionChange">
+			<items>
+				<StandardListItem title="{orderName}" 
+					type="Active"
+					press="onSelectionChange"/>
+			</items>
+		</List>
+	</Page>
 </mvc:View>
