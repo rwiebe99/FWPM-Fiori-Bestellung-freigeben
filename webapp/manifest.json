@@ -38,6 +38,14 @@
 						"master",
 						"orderDetails"
 					]
+				},
+				{
+					"name": "productDetails",
+					"pattern": "orders/:orderId:/products/:productId:",
+					"target": [
+						"master",
+						"productDetails"
+					]
 				}
 				
 			],
@@ -57,6 +65,17 @@
 						"formatter": "jQuery.sap.formatMessage"
 					},
 					"level": 1
+				},
+				"productDetails": {
+					"name": "Detail2",
+					"controlAggregation": "detailPages",
+					"title": {
+						"parts": [
+							"productName"
+						],
+						"formatter": "jQuery.sap.formatMessage"
+					},
+					"level": 2
 				}
 			}
 		}
