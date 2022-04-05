@@ -1,22 +1,45 @@
-<mvc:View
-	xmlns="sap.m"
+<mvc:View xmlns="sap.m"
 	xmlns:layout="sap.ui.layout"
-	xmlns:mvc="sap.ui.core.mvc"
-	controllerName="acceptpurchaseorder.controller.Detail">
-	<Page
-		title="{orderName}"
-		navButtonPress="onNavBack"
-		showNavButton="{device>/system/phone}">
+	xmlns:mvc="sap.ui.core.mvc" controllerName="acceptpurchaseorder.controller.Detail">
+	<Page title="" navButtonPress="onNavBack" showNavButton="{device>/system/phone}">
 		<content>
-					<List id="products" 
-						items="{products}"
-						headerText="Products">
-					<items>
-						<StandardListItem title="{productName}" 
-							type="Active"
-							press="onSelectionChange"/>
-					</items>
-				</List>
+			<ObjectHeader intro="Purchase Order:" title="0000000001" icon="sap-icon://cart" number="200,00" numberUnit="USD" numberState="None" titleActive="false" backgroundDesign="Translucent" condensed="false" visible="true">
+				<attributes/>
+				<statuses>
+					<ObjectStatus text="Open" state="Success" visible="true"/>
+				</statuses>
+				<markers/>
+			</ObjectHeader>
+			<IconTabBar id="idIconTabBarMulti" expanded="{device>/isNoPhone}" class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter icon="sap-icon://hint" key="info">
+						<Text text="Info content goes here ..." />
+					</IconTabFilter>
+					<IconTabFilter icon="sap-icon://attachment" key="attachments" count="3">
+						<Text text="Attachments go here ..." />
+					</IconTabFilter>
+					<IconTabFilter icon="sap-icon://notes" key="notes" count="12">
+						<Text text="Notes go here ..." />
+					</IconTabFilter>
+					<IconTabFilter icon="sap-icon://group" key="people">
+						<Text text="People content goes here ..." />
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+			<List id="products" items="{products}" headerText="Products">
+				<items>
+					<StandardListItem title="{productName}" type="Active" press="onSelectionChange"/>
+				</items>
+			</List>
 		</content>
+		<footer>
+			<OverflowToolbar width="100%" height="46px" design="Auto" enabled="true" visible="true">
+				<content>
+					<ToolbarSpacer width=""/>
+					<Button text="Freigeben" type="Accept" icon="sap-icon://thumb-up" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress"/>
+					<Button text="Ablehnen" type="Reject" icon="sap-icon://thumb-down" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress1"/>
+				</content>
+			</OverflowToolbar>
+		</footer>
 	</Page>
 </mvc:View>
