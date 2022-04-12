@@ -6,14 +6,18 @@
 	<Page
 		title="Orders List">
 		<List id="orders" 
-				items="{/orders}"
+				items="{/ZOSO_PURCHASEORDER}"
 				mode="SingleSelectMaster"
 				selectionChange="onSelectionChange">
-			<items>
-				<StandardListItem title="{orderName}" 
-					type="Active"
-					press="onSelectionChange"/>
-			</items>
+
+				<ObjectListItem
+				title="{PurchaseOrder}"
+				icon="sap-icon://product"
+				type="Active"
+				press="onListItemPress"
+			>
+			</ObjectListItem>
+			
 		</List>
 	</Page>
 </mvc:View>

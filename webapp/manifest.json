@@ -3,7 +3,21 @@
 		"id": "acceptpurchaseorder.routingApp",
 		"applicationVersion": {
 			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"resources": "resources.json",
+		"dataSources": {
+		  "mainService": {
+			"uri": "https://s4h.ososoft.de:44300/sap/opu/odata/sap/ZOSO_PURCHASEORDER/",
+			"type": "OData",
+			"settings": {
+				"odataVersion": "2.0"
+			}
+			
+		  }
 		}
+	
 	},
 	"sap.ui5": {
 		"dependencies": {
@@ -14,6 +28,13 @@
 			"type": "XML",
 			"async": true
 		},
+		"models":{
+			"invoice":{
+				"dataSource": "mainService"
+
+				}
+			},
+		
 		"routing": {
 			"config": {
 				"routerClass": "sap.m.routing.Router",
