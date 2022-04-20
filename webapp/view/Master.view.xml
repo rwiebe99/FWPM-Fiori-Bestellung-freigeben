@@ -3,15 +3,15 @@
 	xmlns:layout="sap.ui.layout"
 	xmlns:mvc="sap.ui.core.mvc"
 	controllerName="acceptpurchaseorder.controller.Master">
-	<Page
-		title="Orders List">
-		<List id="orders" 
-				items="{/ZOSO_PURCHASEORDER}"
+	<Page title="Orders List">
+		
+		<List id="list" 
+				items="{invoice>/A_PurchaseOrder}"
 				mode="SingleSelectMaster"
 				selectionChange="onSelectionChange">
 
 				<ObjectListItem
-				title="{PurchaseOrder}"
+				title="{invoice>PurchaseOrder}"
 				icon="sap-icon://product"
 				type="Active"
 				press="onListItemPress"

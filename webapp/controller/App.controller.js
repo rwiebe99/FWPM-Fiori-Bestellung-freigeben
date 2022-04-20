@@ -10,6 +10,17 @@ sap.ui.define([
         return Controller.extend("acceptpurchaseorder.controller.App", {
             onInit: function () {
 
+            },
+            onPress: function() {
+                var oList = this.byId("list");
+                oList.bindItems({
+                    path: "/A_PurchaseOrderType",
+                    
+                    template: new ObjectListItem({
+                        title: "{PurchaseOrder}"
+                        
+                    })
+                });
             }
         });
     });
