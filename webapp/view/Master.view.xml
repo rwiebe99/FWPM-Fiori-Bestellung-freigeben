@@ -6,16 +6,16 @@
 	<Page title="Orders List">
 		
 		<List id="list" 
-				items="{invoice>/A_PurchaseOrder}"
+				items="{user>/d/results/}"
 				mode="SingleSelectMaster"
 				selectionChange="onSelectionChange">
 
 				<ObjectListItem
-				title="{invoice>PurchaseOrder}"
+				title="{user>PurchaseOrder}"
 				icon="sap-icon://product"
 				type="Active"
-				press="onListItemPress"
-			>
+				press="onListItemPress">
+			
 			</ObjectListItem>
 			
 		</List>

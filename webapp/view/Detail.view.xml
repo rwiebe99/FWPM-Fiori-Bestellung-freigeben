@@ -3,7 +3,7 @@
 	xmlns:mvc="sap.ui.core.mvc" controllerName="acceptpurchaseorder.controller.Detail">
 	<Page title="" navButtonPress="onNavBack" showNavButton="{device>/system/phone}">
 		<content>
-			<ObjectHeader intro="Purchase Order:" title="0000000001" icon="sap-icon://cart" number="200,00" numberUnit="USD" numberState="None" titleActive="false" backgroundDesign="Translucent" condensed="false" visible="true">
+			<ObjectHeader intro="Purchase Order:" title="{user>PurchaseOrder}" icon="sap-icon://cart" number="200,00" numberUnit="USD" numberState="None" titleActive="false" backgroundDesign="Translucent" condensed="false" visible="true">
 				<attributes/>
 				<statuses>
 					<ObjectStatus text="Open" state="Success" visible="true"/>
