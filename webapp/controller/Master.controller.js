@@ -7,6 +7,7 @@ sap.ui.define( ["sap/ui/core/mvc/Controller", "sap/ui/Device"], function (Contro
 		onInit : function () {
 			this.getOwnerComponent().getRouter().getRoute("master").attachPatternMatched(this._onRouteMatched, this);
 
+//in OdataModel umwandeln 
 			var oModel = new sap.ui.model.json.JSONModel("/sap/opu/odata/sap/ZOSO_PURCHASEORDER/A_PurchaseOrder");
 			this.getView().setModel(oModel, "user");
 			
@@ -24,13 +25,13 @@ sap.ui.define( ["sap/ui/core/mvc/Controller", "sap/ui/Device"], function (Contro
 		},
 		onSelectionChange: function(oEvent) {
 			//var sOrderId = oEvent.getSource().getSelectedItem().getBindingContext().getProperty("PurchaseOrder");
-			var productPath = oEvent.getSource().getBindingContext("PurchaseOrder");
-			//this.getView().byId("list").getValue();
-			this.getOwnerComponent().getRouter()
-				.navTo("orderDetails",
-					{PurchaseOrder:productPath},
-					!Device.system.phone);
+			//this.getOwnerComponent().getRouter().navTo("orderDetails", {orderId:sOrderId}, !Device.system.phone);
+			var productPath = oEvent.getParameter("listItem").getBindingContext("user").getPath(),
+				product = productPath.split("/").slice(-1).pop();
+
+				this.getOwnerComponent().getRouter().navTo("orderDetails", { product: product});
 		}
+
 	});
 
 });

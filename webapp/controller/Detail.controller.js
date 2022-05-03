@@ -4,10 +4,14 @@ sap.ui.define( ["sap/ui/core/mvc/Controller","sap/ui/core/routing/History", "sap
 	return Controller.extend("acceptpurchaseorder.controller.Detail", {
 		onInit : function () {
 			this.getOwnerComponent().getRouter().getRoute("orderDetails").attachPatternMatched(this._onRouteMatched, this);
+
+			var oModel = new sap.ui.model.json.JSONModel("/sap/opu/odata/sap/ZOSO_PURCHASEORDER/A_PurchaseOrder");
+			this.getView().setModel(oModel, "user");
 		},
+		
 		_onRouteMatched: function(oEvent) {
-			this._orderId = oEvent.getParameter("arguments").orderId;
-			this.getView().bindElement("/orders/" + this._orderId);
+			this._product = oEvent.getParameter("arguments").product;
+			this.getView().bindElement( "user>/d/results/" + this._product);
 		},
 		onSelectionChange: function(oEvent) {
 			var sProductId = oEvent.getSource().getBindingContext().getProperty("productId");

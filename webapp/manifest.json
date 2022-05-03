@@ -54,7 +54,7 @@
 				},
 				{
 					"name": "orderDetails",
-					"pattern": "orders/:orderId:",
+					"pattern": "orders/:product:",
 					"target": [
 						"master",
 						"orderDetails"
