@@ -5,18 +5,50 @@
 	controllerName="acceptpurchaseorder.controller.Master">
 	<Page title="Orders List">
 		
+		
 		<List id="list" 
-				items="{user>/d/results/}"
+				items="{path:'user>/d/results/',
+                        sorter: 'user>PurchaseOrder',
+                        descanding: 'true'}"
 				mode="SingleSelectMaster"
 				selectionChange="onSelectionChange">
+				<headerToolbar>
+                    <OverflowToolbar>
+                        <SearchField
+                            id="searchField"
+                            placeholder="Search"
+                            search=".onSearch"
+                            width="auto">
+                            <layoutData>
+                                <OverflowToolbarLayoutData
+                                    minWidth="150px"
+                                    maxWidth="240px"
+                                    shrinkable="true"
+                                    priority="NeverOverflow"/>
+                            </layoutData>
+                        </SearchField>
+                        <ToolbarSpacer/>
+                        <!--<Button
+                            id="sortButton"
+                            press=".onOpenViewSettings"
+                            icon="sap-icon://sort"
+                            type="Transparent"/>-->
 
+                    </OverflowToolbar>
+                </headerToolbar>
 				<ObjectListItem
 				title="{user>PurchaseOrder}"
 				icon="sap-icon://product"
 				type="Active"
 				press="onListItemPress">
+				
+					<ObjectAttribute title="Created at" text="{path: 'user>PurchaseOrderDate', formatter:'.dateFormatter' }"/>
+					<ObjectAttribute title="Created by" text="{user>CreatedByUser}"/>
+		
 			
+							
 			</ObjectListItem>
+
 			
 		</List>
 	</Page>
