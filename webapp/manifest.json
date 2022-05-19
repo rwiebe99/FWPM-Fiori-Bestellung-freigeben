@@ -16,8 +16,12 @@
 			}
 			
 		  }
+		},
+		"i18n": {
+			"bundleName": "acceptpurchaseorder.i18n.i18n",
+			"supportedLocales": ["de", "en"],
+			"fallbackLocale": "en"
 		}
-	
 	},
 	"sap.ui5": {
 		"dependencies": {
@@ -32,7 +36,15 @@
 			"invoice":{
 				"dataSource": "mainService"
 
+				},
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "acceptpurchaseorder.i18n.i18n",
+					"supportedLocales": ["de", "en"],
+					"fallbackLocale": "en"
 				}
+			}
 			},
 		
 		"routing": {

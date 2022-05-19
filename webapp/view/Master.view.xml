@@ -3,15 +3,17 @@
 	xmlns:layout="sap.ui.layout"
 	xmlns:mvc="sap.ui.core.mvc"
 	controllerName="acceptpurchaseorder.controller.Master">
-	<Page title="Orders List">
+	<Page title="{i18n>titleList}">
 		
 		
 		<List id="list" 
 				items="{path:'user>/d/results/',
-                        sorter: 'user>PurchaseOrder',
-                        descanding: 'true'}"
+                        sorter: 'user>PurchaseOrder'}"
 				mode="SingleSelectMaster"
-				selectionChange="onSelectionChange">
+				selectionChange="onSelectionChange"
+                expandable="{device>/system/phone}"
+                growing="false"
+                >
 				<headerToolbar>
                     <OverflowToolbar>
                         <SearchField
@@ -28,11 +30,11 @@
                             </layoutData>
                         </SearchField>
                         <ToolbarSpacer/>
-                        <!--<Button
+                        <Button
                             id="sortButton"
-                            press=".onOpenViewSettings"
+                            press="handleOpenDialog"
                             icon="sap-icon://sort"
-                            type="Transparent"/>-->
+                            type="Transparent"/>
 
                     </OverflowToolbar>
                 </headerToolbar>
@@ -40,16 +42,13 @@
 				title="{user>PurchaseOrder}"
 				icon="sap-icon://product"
 				type="Active"
-				press="onListItemPress">
-				
-					<ObjectAttribute title="Created at" text="{path: 'user>PurchaseOrderDate', formatter:'.dateFormatter' }"/>
-					<ObjectAttribute title="Created by" text="{user>CreatedByUser}"/>
-		
-			
-							
+				press="onListItemPress">				
+					<ObjectAttribute title="{i18n>created}" text="{path: 'user>PurchaseOrderDate', formatter:'.dateFormatter' }"/>
+					<ObjectAttribute title="{i18n>creator}" text="{user>CreatedByUser}"/>					
 			</ObjectListItem>
 
 			
 		</List>
+       
 	</Page>
 </mvc:View>

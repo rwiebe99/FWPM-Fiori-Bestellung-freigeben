@@ -4,10 +4,12 @@ sap.ui.define( [
 	"sap/ui/core/mvc/Controller",
 	 "sap/ui/Device",
 	  "sap/ui/model/json/JSONModel",
+	  
 	   "sap/ui/model/Filter",
 	    "sap/ui/model/FilterOperator",
+		"sap/ui/core/Fragment",
 		 'sap/ui/model/Sorter',], 
-function (Controller, Device , JSONModel, Filter, Sorter, FilterOperator, GroupHeaderListItem,  Fragment, formatter) {
+function (Controller, Device , JSONModel, Filter, Sorter, FilterOperator, GroupHeaderListItem,  Fragment , formatter) {
 	"use strict";
 
 	return Controller.extend("acceptpurchaseorder.controller.Master", {
@@ -19,6 +21,9 @@ function (Controller, Device , JSONModel, Filter, Sorter, FilterOperator, GroupH
 			var oModel = new sap.ui.model.json.JSONModel("/sap/opu/odata/sap/ZOSO_PURCHASEORDER/A_PurchaseOrder");
 			this.getView().setModel(oModel, "user");
 	
+			this._mDialogs = {};
+
+			
 		},
 		
 		_onRouteMatched: function(oEvent) {
@@ -70,7 +75,50 @@ function (Controller, Device , JSONModel, Filter, Sorter, FilterOperator, GroupH
 			var year = date.getFullYear();
 			return day.toString() + '.' + mon.toString() + '.' + year.toString()  ;
 			
-		}
+		},
+		
+		// Opens View Settings Dialog
+		handleOpenDialog: function () {
+			this._openDialog("Dialog");
+		},
+
+		_openDialog : function (sName, sPage, fInit) {
+			var oView = this.getView();
+
+			// creates requested dialog if not yet created
+			if (!this._mDialogs[sName]) {
+				this._mDialogs[sName] = sap.ui.core.Fragment.load({
+					id: oView.getId(),
+					name: "acceptpurchaseorder.view." + sName,
+					controller: this
+				}).then(function(oDialog){
+					oView.addDependent(oDialog);
+					if (fInit) {
+						fInit(oDialog);
+					}
+					return oDialog;
+				});
+			}
+			this._mDialogs[sName].then(function(oDialog){
+				// opens the requested dialog
+				oDialog.open(sPage);
+			});
+		},
+		handleConfirm: function (oEvent) {
+			this._applySortGroup(oEvent);
+		},
+		_applySortGroup: function (oEvent) {
+            var params = oEvent.getParameters(),
+                path,
+                desc,
+                sorter = [];
+            
+            path = params.sortItem.getKey();
+            desc = params.sortDescending;
+            sorter.push(new sap.ui.model.Sorter(path, desc));
+            this.byId("list").getBinding("items").sort(sorter);
+			
+        }
 
 	});
 
