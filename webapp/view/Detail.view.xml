@@ -25,7 +25,7 @@
 								<ColumnListItem vAlign="Middle">
 									<cells>
 
-										<Text text="{item>PurchaseOrder}" />
+										<Text text="{item>PurchaseOrderItem}" />
 
 									</cells>
 								</ColumnListItem>
