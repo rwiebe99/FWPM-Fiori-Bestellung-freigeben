@@ -15,7 +15,7 @@
 				<items>
 					<IconTabFilter icon="sap-icon://hint" key="info">
 						<Title level="H3" text="{user>PurchaseOrder}" />
-						<Table id="LIST" mode="SingleSelectLeft" items="{path:'item>/d/results/', filters: [{path:'PurchaseOrder' , operator: 'EQ', value1:'4500000001'}] }">
+						<Table id="LIST" mode="SingleSelectLeft" items="{path:'item>/d/results/'}">
 							<columns>
 								<Column width="12em">
 									<Text text="Product" />
@@ -25,7 +25,7 @@
 								<ColumnListItem vAlign="Middle">
 									<cells>
 
-										<Text text="{item>PurchaseOrderItem}" />
+										<Text text="{item>PurchaseOrderItemText}" />
 
 									</cells>
 								</ColumnListItem>

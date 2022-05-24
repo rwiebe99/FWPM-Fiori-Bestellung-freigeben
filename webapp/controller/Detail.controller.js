@@ -14,11 +14,12 @@ sap.ui.define( ["sap/ui/core/mvc/Controller","sap/ui/core/routing/History", "sap
 		_onRouteMatched: function(oEvent) {
 			this._product = oEvent.getParameter("arguments").product;
 			this.getView().bindElement( "user>/d/results/" + this._product);
-			var order = this.get
+			var orderNumber = this.getView().getModel("user").getBindings().at("0").oValue.toString();
+			//var string = orderNumber.toString();
 
 			//https://S4H.OSOSOFT.DE:44300/sap/opu/odata/sap/ZOSO_PURCHASEORDER/A_PurchaseOrder('4500000001')/to_PurchaseOrderItem
 			//this.getView().bindElement( "item>/d/results/" + this._product);
-			var oModelItem = new sap.ui.model.json.JSONModel("/sap/opu/odata/sap/ZOSO_PURCHASEORDER/A_PurchaseOrder('"+ order +"')/to_PurchaseOrderItem");
+			var oModelItem = new sap.ui.model.json.JSONModel("/sap/opu/odata/sap/ZOSO_PURCHASEORDER/A_PurchaseOrder('"+orderNumber+"')/to_PurchaseOrderItem");
 			this.getView().setModel(oModelItem, "item");
 		},
 		onSelectionChange: function(oEvent) {
