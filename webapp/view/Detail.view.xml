@@ -1,12 +1,14 @@
 <mvc:View xmlns="sap.m"
 	xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:m="sap.m"
 	xmlns:mvc="sap.ui.core.mvc" controllerName="acceptpurchaseorder.controller.Detail">
 	<Page title="" navButtonPress="onNavBack" showNavButton="{device>/system/phone}">
 		<content>
-			<ObjectHeader intro="Purchase Order:" title="{user>PurchaseOrder}" icon="sap-icon://cart" number="200,00" numberUnit="USD" numberState="None" titleActive="false" backgroundDesign="Translucent" condensed="false" visible="true">
+			<ObjectHeader intro="Purchase Order:" title="{user>PurchaseOrder}" icon="sap-icon://cart" number="124124" numberUnit="{user>DocumentCurrency}" numberState="None" titleActive="false" backgroundDesign="Translucent" condensed="false" visible="true">
 				<attributes/>
 				<statuses>
-					<ObjectStatus text="{user>PurchasingProcessingStatus}" state="Success" visible="true"/>
+					<ObjectStatus text="{path: 'user>CreationDate', type: 'sap.ui.model.type.DateTime',formatOptions: { pattern: 'dd.MM.yyyy'}}" state="None" visible="true"/>
 				</statuses>
 				<markers/>
 			</ObjectHeader>
@@ -14,33 +16,53 @@
 			<IconTabBar id="idIconTabBarMulti" expanded="{device>/isNoPhone}" class="sapUiResponsiveContentPadding">
 				<items>
 					<IconTabFilter icon="sap-icon://hint" key="info">
-						<Title level="H3" text="{user>PurchaseOrder}" />
-						<Table id="LIST" mode="SingleSelectLeft" items="{path:'item>/d/results/'}">
+						<Title level="H3" text="General Information" />
+						<OverflowToolbar width="100%" height="150px" design="Auto" enabled="true" visible="true">
+							<content>
+								<form:SimpleForm maxContainerCols="2" editable="false" layout="ResponsiveGridLayout" labelSpanL="12" labelSpanM="12" emptySpanL="0" emptySpanM="0" columnsL="1" columnsM="1">
+									<form:content>
+										<m:Label text="Order ID"/>
+										<m:Text text="{user>PurchaseOrder}"/>
+										<m:Label text="Supplier"/>
+										<m:Text text="{user>Supplier}"/>
+										<m:Label text="Creation Date"/>
+										<m:Text text="{path: 'user>PurchaseOrderDate' }"/>
+									</form:content>
+								</form:SimpleForm>
+							</content>
+						</OverflowToolbar>
+						<Table id="LIST" items="{path:'item>/d/results/'}">
 							<columns>
+								<Column width="12em">
+									<Text text="Position" />
+								</Column>
 								<Column width="12em">
 									<Text text="Product" />
 								</Column>
+
+								<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+									<Text text="Quantity" />
+								</Column>
+								<Column hAlign="End">
+									<Text text="Price" />
+								</Column>
 							</columns>
 							<items>
-								<ColumnListItem vAlign="Middle">
+								<ColumnListItem >
 									<cells>
-
+										<Text text="{item>PurchaseOrderItem}" />
 										<Text text="{item>PurchaseOrderItemText}" />
-
+										<Text text="{item>OrderQuantity} {item>OrderPriceUnit}" />
+										<Text text="{item>NetPriceAmount} {item>DocumentCurrency}" />
 									</cells>
 								</ColumnListItem>
 							</items>
 						</Table>
 					</IconTabFilter>
-					<IconTabFilter icon="sap-icon://attachment" key="attachments" count="3">
-						<Text text="Attachments go here ..." />
-					</IconTabFilter>
 					<IconTabFilter icon="sap-icon://notes" key="notes" count="12">
 						<Text text="Notes go here ..." />
 					</IconTabFilter>
-					<IconTabFilter icon="sap-icon://group" key="people">
-						<Text text="People content goes here ..." />
-					</IconTabFilter>
+				
 				</items>
 			</IconTabBar>
 

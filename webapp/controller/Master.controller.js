@@ -65,7 +65,6 @@ function (Controller, Device , JSONModel, Filter, Sorter, FilterOperator, GroupH
 			var oList = this.getView().byId("list");
 			var oBinding = oList.getBinding("items");
 			oBinding.filter(aFilter);
-
         },
 	
 		dateFormatter:function(meinDate){
