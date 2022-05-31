@@ -5,7 +5,7 @@
 	xmlns:mvc="sap.ui.core.mvc" controllerName="acceptpurchaseorder.controller.Detail">
 	<Page title="" navButtonPress="onNavBack" showNavButton="{device>/system/phone}">
 		<content>
-			<ObjectHeader intro="Purchase Order:" title="{user>PurchaseOrder}" icon="sap-icon://cart" number="124124" numberUnit="{user>DocumentCurrency}" numberState="None" titleActive="false" backgroundDesign="Translucent" condensed="false" visible="true">
+			<ObjectHeader intro="Purchase Order:" title="{user>PurchaseOrder}" icon="sap-icon://cart" number="{path: 'item>NetPriceAmount' , formatter:'.gesamtPreis' }" numberUnit="{user>DocumentCurrency}" numberState="None" titleActive="false" backgroundDesign="Translucent" condensed="false" visible="true">
 				<attributes/>
 				<statuses>
 					<ObjectStatus text="{path: 'user>CreationDate', type: 'sap.ui.model.type.DateTime',formatOptions: { pattern: 'dd.MM.yyyy'}}" state="None" visible="true"/>
@@ -19,32 +19,32 @@
 						<Title level="H3" text="General Information" />
 						<OverflowToolbar width="100%" height="150px" design="Auto" enabled="true" visible="true">
 							<content>
-								<form:SimpleForm maxContainerCols="2" editable="false" layout="ResponsiveGridLayout" labelSpanL="12" labelSpanM="12" emptySpanL="0" emptySpanM="0" columnsL="1" columnsM="1">
+								<form:SimpleForm maxContainerCols="1" editable="false" layout="ResponsiveGridLayout" labelSpanL="12" labelSpanM="12" labelSpanS="6" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2" columnsS="2">
 									<form:content>
 										<m:Label text="Order ID"/>
 										<m:Text text="{user>PurchaseOrder}"/>
 										<m:Label text="Supplier"/>
 										<m:Text text="{user>Supplier}"/>
 										<m:Label text="Creation Date"/>
-										<m:Text text="{path: 'user>PurchaseOrderDate' }"/>
+										<m:Text text="{path: 'user>PurchaseOrderDate' , formatter:'.dateFormatter2' }"/>
 									</form:content>
 								</form:SimpleForm>
 							</content>
 						</OverflowToolbar>
 						<Table id="LIST" items="{path:'item>/d/results/'}">
 							<columns>
-								<Column width="12em">
-									<Text text="Position" />
+								<Column width="250px" >
+									<Label text="Position" />
 								</Column>
-								<Column width="12em">
-									<Text text="Product" />
+								<Column demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+									<Label text="Product" />
 								</Column>
 
-								<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
-									<Text text="Quantity" />
+								<Column   demandPopin="true"  minScreenWidth="Tablet" popinDisplay="Inline">
+									<Label text="Quantity" />
 								</Column>
-								<Column hAlign="End">
-									<Text text="Price" />
+								<Column >
+									<Label text="Price" />
 								</Column>
 							</columns>
 							<items>

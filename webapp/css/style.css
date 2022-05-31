@@ -1,1 +1,18 @@
-/* Enter your custom styles here */
+
+.sapMListTblSubCnt {
+    padding-left: 1rem !important;
+}
+
+.sapMListTblSubCntHdr {
+    width: 30%;
+    display: inline-flex;
+    justify-content: flex-end;
+}
+
+.sapMListTblSubCntVal {
+    width: 65%;
+}
+
+.sapMListTblSubCntRowInline {
+    align-items: normal;
+}

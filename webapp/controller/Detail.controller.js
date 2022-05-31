@@ -26,7 +26,25 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/routing/History", "sap
 					{ orderId: this._orderId, productId: sProductId });
 		},
 
+		gesamtPreis: function(price){
+			var gesamt = 0;
+			if(price == null){
+				return;
+			}
+			var länge = this.getView().getModel("item").oData.d.results.length; 
+			if(länge == null){
+				return;
+			}
+			for(var i=0;i<länge;i++){
+				gesamt = gesamt + this.getView().getModel("item").oData.d.results[i].NetPriceAmount.parseFloat();
+			}
+			return gesamt;
+		},
+
 		dateFormatter2: function (Datum) {
+			if(Datum == null){
+				return;
+			}
 			var date = new Date(parseInt(Datum.substring(6, 19)));
 			var day = date.getDate();
 			var mon = date.getMonth() + 1;
