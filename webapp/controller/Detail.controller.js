@@ -1,7 +1,8 @@
 sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/routing/History", "sap/ui/Device"], function (Controller, History, Device, formatter) {
 	"use strict";
-
+	let storage = null;
 	return Controller.extend("acceptpurchaseorder.controller.Detail", {
+		
 		onInit: function () {
 			this.getOwnerComponent().getRouter().getRoute("orderDetails").attachPatternMatched(this._onRouteMatched, this);
 
@@ -19,30 +20,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/routing/History", "sap
 
 			this.getView().setModel(oModelItem, "item");
 		},
-		onSelectionChange: function (oEvent) {
-			var sProductId = oEvent.getSource().getBindingContext().getProperty("productId");
-			this.getOwnerComponent().getRouter()
-				.navTo("productDetails",
-					{ orderId: this._orderId, productId: sProductId });
-		},
-
-		gesamtPreis: function(price){
-			var gesamt = 0;
-			if(price == null){
-				return;
-			}
-			var länge = this.getView().getModel("item").oData.d.results.length; 
-			if(länge == null){
-				return;
-			}
-			for(var i=0;i<länge;i++){
-				gesamt = gesamt + this.getView().getModel("item").oData.d.results[i].NetPriceAmount.parseFloat();
-			}
-			return gesamt;
-		},
-
+	
 		dateFormatter2: function (Datum) {
-			if(Datum == null){
+			if (Datum == null) {
 				return;
 			}
 			var date = new Date(parseInt(Datum.substring(6, 19)));
@@ -51,6 +31,31 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/routing/History", "sap
 			var year = date.getFullYear();
 			return day.toString() + '.' + mon.toString() + '.' + year.toString();
 
+		},
+		totalAmount: function () {
+
+			if (this.getView().getModel("item") == null) {
+				return;
+			}
+
+			var result = this.getView().getModel("item").oData.d.results[0].NetPriceAmount;
+			var count = 1;
+
+			/* var länge = this.getView().getModel("item").oData.d.results.length; 
+			if(länge == null){
+				return;
+			}
+			for(var i=0;i<länge;i++){
+				result = result + this.getView().getModel("item").oData.d.results[i].NetPriceAmount.parseFloat();
+			} */
+
+			do {
+				result = result + this.getView().getModel("item").oData.d.results[count].NetPriceAmount;
+				count += 1;
+
+			} while (result != null);
+
+			return result;
 		},
 
 		totalCount: function (data) {
