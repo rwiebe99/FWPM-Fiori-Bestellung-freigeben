@@ -13,6 +13,7 @@
 				selectionChange="onSelectionChange"
                 expandable="{device>/system/phone}"
                 growing="false"
+                rememberSelection="false"
                 >
 				<headerToolbar>
                     <OverflowToolbar>
