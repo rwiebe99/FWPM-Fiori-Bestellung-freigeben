@@ -5,10 +5,10 @@
 	xmlns:mvc="sap.ui.core.mvc" controllerName="acceptpurchaseorder.controller.Detail">
 	<Page title="" navButtonPress="onNavBack" showNavButton="{device>/system/phone}">
 		<content>
-			<ObjectHeader intro="Purchase Order:" title="{user1>PurchaseOrder}" icon="sap-icon://cart" number=" " numberUnit="{user1>DocumentCurrency}" numberState="None" titleActive="false" backgroundDesign="Translucent" condensed="false" visible="true">
+			<ObjectHeader intro="Purchase Order:" title="{data>PurchaseOrder}" icon="sap-icon://cart" number=" " numberUnit="{data>DocumentCurrency}" numberState="None" titleActive="false" backgroundDesign="Translucent" condensed="false" visible="true">
 				<attributes/>
 				<statuses>
-					<ObjectStatus text="{path: 'user1>CreationDate', type: 'sap.ui.model.type.DateTime',formatOptions: { pattern: 'dd.MM.yyyy'}}" state="None" visible="true"/>
+					<ObjectStatus text="TEST" state="None" visible="true"/>
 				</statuses>
 				<markers/>
 			</ObjectHeader>
@@ -21,31 +21,29 @@
 							<content>
 								<form:SimpleForm maxContainerCols="1" editable="false" layout="ResponsiveGridLayout" labelSpanL="12" labelSpanM="12" labelSpanS="6" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2" columnsS="2">
 									<form:content>
-										
 										<m:Label text="Order ID"/>
-										<m:Text text="{user1>PurchaseOrder}"/>
-											
+										<m:Text text="{data>PurchaseOrder}"/>
 										<m:Label text="Supplier"/>
-										<m:Text text="{user1>Supplier}"/>
+										<m:Text text="{data>Supplier}"/>
 										<m:Label text="Creation Date"/>
-										<m:Text text="{path: 'user1>PurchaseOrderDate' , formatter:'.dateFormatter2' }"/>
+										<m:Text text="{path: 'data>PurchaseOrderDate' , formatter:'.dateFormatter2' }" />
 									</form:content>
 								</form:SimpleForm>
 							</content>
 						</OverflowToolbar>
 						<Table id="LIST" items="{path:'item>/d/results/'}">
 							<columns>
-								<Column width="250px" >
+								<Column width="100px">
 									<Label text="Position" />
 								</Column>
 								<Column demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
 									<Label text="Product" />
 								</Column>
 
-								<Column   demandPopin="true"  minScreenWidth="Tablet" popinDisplay="Inline">
+								<Column demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
 									<Label text="Quantity" />
 								</Column>
-								<Column >
+								<Column alignItems = "end">
 									<Label text="Price" />
 								</Column>
 							</columns>
@@ -61,10 +59,10 @@
 							</items>
 						</Table>
 					</IconTabFilter>
-					<IconTabFilter icon="sap-icon://notes" key="notes" count="12">
-						<Text text="Notes go here ..." />
+					<IconTabFilter icon="sap-icon://notes" key="notes" count="">
+						<Text text="{notes>/}" />
 					</IconTabFilter>
-				
+
 				</items>
 			</IconTabBar>
 

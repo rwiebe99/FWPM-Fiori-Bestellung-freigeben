@@ -1,46 +1,50 @@
 sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/routing/History", "sap/ui/Device"], function (Controller, History, Device, formatter) {
 	"use strict";
+
 	var oModelItem;
 	var loaded = false;
+	var base = "/sap/opu/odata/sap/ZOSO_PURCHASEORDER/A_PurchaseOrder";
+
 	return Controller.extend("acceptpurchaseorder.controller.Detail", {
-		
+
 		onInit: function () {
 			this.getOwnerComponent().getRouter().getRoute("orderDetails").attachPatternMatched(this._onRouteMatched, this);
 
-			var oModel = new sap.ui.model.json.JSONModel("/sap/opu/odata/sap/ZOSO_PURCHASEORDER/A_PurchaseOrder");
-			this.getView().setModel(oModel, "user1");
+			var oModel = new sap.ui.model.json.JSONModel(base);
+			this.getView().setModel(oModel, "data");
 			oModelItem = new sap.ui.model.json.JSONModel();
-			var promLoadData = oModelItem.loadData("/sap/opu/odata/sap/ZOSO_PURCHASEORDER/A_PurchaseOrder('4500000001')/to_PurchaseOrderItem");
 		},
 
 		_onRouteMatched: function (oEvent) {
 			this._product = oEvent.getParameter("arguments").product;
-			this.getView().bindElement("user1>/d/results/" + this._product);
+			this.getView().bindElement("data>/d/results/" + this._product);
 
-			var orderNumber = this.getView().getModel("user1").getBindings().at("0").oValue;
-			if (orderNumber == null){
+			var orderNumber = this.getView().getModel("data").getBindings().at("0").oValue;
+			if (orderNumber == null) {
 				return;
 			}
-			//oModelItem = new sap.ui.model.json.JSONModel();
-			var promLoadData = oModelItem.loadData("/sap/opu/odata/sap/ZOSO_PURCHASEORDER/A_PurchaseOrder('" + orderNumber + "')/to_PurchaseOrderItem")
-			var sPath = "/sap/opu/odata/sap/ZOSO_PURCHASEORDER/A_PurchaseOrder('" + orderNumber + "')/to_PurchaseOrderItem";
+			var link = base + "('" + orderNumber + "')";
+			var promLoadData = oModelItem.loadData(link + "/to_PurchaseOrderItem")
+			var sPath = link + "/to_PurchaseOrderItem";
+
 			promLoadData.then(function () {
 				loaded = true;
 				this.totalAmount();
-				//console.log(oModelItem);
 				this.getView().bindElement({
 					path: sPath
 				});
 			}.bind(this));
+
 			this.getView().setModel(oModelItem, "item");
 
-		
-			
+			var oModel = new sap.ui.model.json.JSONModel(link + "/to_PurchaseOrderNote");
+			this.getView().setModel(oModel, "notes");
+
 		},
 		loadData: function (sPath) {
 			return new Promise(function (resolve, reject) {
 				alert("Prom start");
-				oModelItem.read( sPath , {
+				oModelItem.read(sPath, {
 					success: function (oData) {
 						alert("Success");
 						resolve();
@@ -69,28 +73,23 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/routing/History", "sap
 				return;
 			}
 
-			var result = this.getView().getModel("item").oData.d.results[0].NetPriceAmount;
-			var count = 1;
-			var check = true;
-			result = parseFloat(result);
+			var result = 0.0;
 
-			/* var länge = this.getView().getModel("item").oData.d.results.length; 
-			if(länge == null){
-				return;
-			}
-			for(var i=0;i<länge;i++){
-				result = result + this.getView().getModel("item").oData.d.results[i].NetPriceAmount.parseFloat();
+			/* var length = this.getView().getModel("item").oData.d.results.length;
+			for (let i = 0; i < length; i++) {
+				var temp = this.getView().getModel("item").oData.d.results[i].NetPriceAmount;
+				temp = parseFloat(temp)
+				result += temp;
 			} */
 
-			while (false);
-			{
-				var temp = this.getView().getModel("item").oData.d.results[count].NetPriceAmount;
-				temp = parseFloat(temp);
-				if (temp != null) {
-					result += temp;
-					count++;
-				} else check = false;
-			}
+			var array = this.getView().getModel("item").oData.d.results;
+			array.forEach(function (element) {
+				var temp = element.NetPriceAmount
+				temp = parseFloat(temp)
+				result += temp;
+			});
+
+			result = result.toFixed(2);
 			document.getElementById("__header0-number-number").innerHTML = result.toString();
 		},
 
