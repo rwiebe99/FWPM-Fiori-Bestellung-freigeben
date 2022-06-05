@@ -4,7 +4,6 @@ sap.ui.define( [
 	"sap/ui/core/mvc/Controller",
 	 "sap/ui/Device",
 	  "sap/ui/model/json/JSONModel",
-	  
 	   "sap/ui/model/Filter",
 	    "sap/ui/model/FilterOperator",
 		"sap/ui/core/Fragment",
@@ -22,21 +21,9 @@ function (Controller, Device , JSONModel, Filter, Sorter, FilterOperator, GroupH
 			this.getView().setModel(oModel, "user");
 	
 			this._mDialogs = {};
-
-			
 		},
 		
-		_onRouteMatched: function(oEvent) {
-			/*
-			* Navigate to the first item by default only on desktop and tablet (but not phone).
-			* Note that item selection is not handled as it is
-			* out of scope of this sample
-			*/
-			if (!Device.system.phone) {
-				this.getOwnerComponent().getRouter()
-					.navTo("orderDetails", {orderId: 0}, true);
-			}
-		},
+		
 		onSelectionChange: function(oEvent) {
 			//var sOrderId = oEvent.getSource().getSelectedItem().getBindingContext().getProperty("PurchaseOrder");
 			//this.getOwnerComponent().getRouter().navTo("orderDetails", {orderId:sOrderId}, !Device.system.phone);
@@ -103,23 +90,21 @@ function (Controller, Device , JSONModel, Filter, Sorter, FilterOperator, GroupH
 				oDialog.open(sPage);
 			});
 		},
+
 		handleConfirm: function (oEvent) {
 			this._applySortGroup(oEvent);
 		},
+
 		_applySortGroup: function (oEvent) {
             var params = oEvent.getParameters(),
                 path,
                 desc,
                 sorter = [];
-            
             path = params.sortItem.getKey();
             desc = params.sortDescending;
             sorter.push(new sap.ui.model.Sorter(path, desc));
             this.byId("list").getBinding("items").sort(sorter);
-			
         }
-
 	});
-
 });
 

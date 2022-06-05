@@ -1,55 +1,25 @@
-<mvc:View
-	xmlns="sap.m"
-	xmlns:layout="sap.ui.layout"
-	xmlns:mvc="sap.ui.core.mvc"
-	controllerName="acceptpurchaseorder.controller.Master">
-	<Page title="{i18n>titleList}">
-		
-		
-		<List id="list" 
-				items="{path:'user>/d/results/',
-                        sorter: 'user>PurchaseOrder'}"
-				mode="SingleSelectMaster"
-				selectionChange="onSelectionChange"
-                expandable="{device>/system/phone}"
-                growing="false"
-                rememberSelection="false"
-                >
-				<headerToolbar>
-                    <OverflowToolbar>
-                        <SearchField
-                            id="searchField"
-                            placeholder="Search"
-                            search=".onSearch"
-                            width="auto">
-                            <layoutData>
-                                <OverflowToolbarLayoutData
-                                    minWidth="150px"
-                                    maxWidth="240px"
-                                    shrinkable="true"
-                                    priority="NeverOverflow"/>
-                            </layoutData>
-                        </SearchField>
-                        <ToolbarSpacer/>
-                        <Button
-                            id="sortButton"
-                            press="handleOpenDialog"
-                            icon="sap-icon://sort"
-                            type="Transparent"/>
+<mvc:View xmlns="sap.m"
+    xmlns:layout="sap.ui.layout"
+    xmlns:mvc="sap.ui.core.mvc" controllerName="acceptpurchaseorder.controller.Master">
+    <Page title="{i18n>titleList}">
+        <List id="list" items="{path:'user>/d/results/',
+                        sorter: 'user>PurchaseOrder'}" mode="SingleSelectMaster" selectionChange="onSelectionChange" expandable="{device>/system/phone}" growing="false" rememberSelection="false">
+            <headerToolbar>
+                <OverflowToolbar>
+                    <SearchField id="searchField" placeholder="Search" search=".onSearch" width="auto">
+                        <layoutData>
+                            <OverflowToolbarLayoutData minWidth="150px" maxWidth="240px" shrinkable="true" priority="NeverOverflow"/>
+                        </layoutData>
+                    </SearchField>
+                    <ToolbarSpacer/>
+                    <Button id="sortButton" press="handleOpenDialog" icon="sap-icon://sort" type="Transparent"/>
 
-                    </OverflowToolbar>
-                </headerToolbar>
-				<ObjectListItem
-				title="{user>PurchaseOrder}"
-				icon="sap-icon://product"
-				type="Active"
-				press="onListItemPress">				
-					<ObjectAttribute title="{i18n>created}" text="{path: 'user>PurchaseOrderDate', formatter:'.dateFormatter' }"/>
-					<ObjectAttribute title="{i18n>creator}" text="{user>CreatedByUser}"/>					
-			</ObjectListItem>
-
-			
-		</List>
-       
-	</Page>
+                </OverflowToolbar>
+            </headerToolbar>
+            <ObjectListItem title="{user>PurchaseOrder}" icon="sap-icon://product" type="Active" press="onListItemPress">
+                <ObjectAttribute title="{i18n>created}" text="{path: 'user>PurchaseOrderDate', formatter:'.dateFormatter' }"/>
+                <ObjectAttribute title="{i18n>creator}" text="{user>CreatedByUser}"/>
+            </ObjectListItem>
+        </List>
+    </Page>
 </mvc:View>
