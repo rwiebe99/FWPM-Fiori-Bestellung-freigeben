@@ -3,7 +3,8 @@
     xmlns:mvc="sap.ui.core.mvc" controllerName="acceptpurchaseorder.controller.Master">
     <Page title="{i18n>titleList}">
         <List id="list" items="{path:'user>/d/results/',
-                        sorter: 'user>PurchaseOrder'}" mode="SingleSelectMaster" selectionChange="onSelectionChange" expandable="{device>/system/phone}" growing="false" rememberSelection="false">
+                        sorter: 'user>PurchaseOrder' }" 
+                        mode="SingleSelectMaster" selectionChange="onSelectionChange" expandable="{device>/system/phone}" growing="false" rememberSelection="false">
             <headerToolbar>
                 <OverflowToolbar>
                     <SearchField id="searchField" placeholder="Search" search=".onSearch" width="auto">
@@ -19,7 +20,15 @@
             <ObjectListItem title="{user>PurchaseOrder}" icon="sap-icon://product" type="Active" press="onListItemPress">
                 <ObjectAttribute title="{i18n>created}" text="{path: 'user>PurchaseOrderDate', formatter:'.dateFormatter' }"/>
                 <ObjectAttribute title="{i18n>creator}" text="{user>CreatedByUser}"/>
+                <ObjectAttribute text="{user>PurchasingDocumentDeletionCode}"/>
             </ObjectListItem>
         </List>
     </Page>
 </mvc:View>
+
+<!-- , 
+                        filters: [{
+                          path: 'user>PurchasingDocumentDeletionCode', 
+                          operator: 'NE', 
+                          value1: ' '
+                        }]-->
