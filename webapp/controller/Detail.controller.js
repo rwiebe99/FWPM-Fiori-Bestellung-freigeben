@@ -75,13 +75,6 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/routing/History", "sap
 
 			var result = 0.0;
 
-			/* var length = this.getView().getModel("item").oData.d.results.length;
-			for (let i = 0; i < length; i++) {
-				var temp = this.getView().getModel("item").oData.d.results[i].NetPriceAmount;
-				temp = parseFloat(temp)
-				result += temp;
-			} */
-
 			var array = this.getView().getModel("item").oData.d.results;
 			array.forEach(function (element) {
 				var temp = element.NetPriceAmount

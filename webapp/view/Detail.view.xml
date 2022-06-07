@@ -167,27 +167,27 @@
 						<content>
 							<Table id="LIST" items="{path:'item>/d/results/'}">
 								<columns>
-									<Column width="100px">
+									<Column width="150px">
 										<Label text="Position" />
 									</Column>
 									<Column demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
 										<Label text="Product" />
 									</Column>
 
-									<Column demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
+									<Column hAlign="End" demandPopin="true" minScreenWidth="Tablet" popinDisplay="Inline">
 										<Label text="Quantity" />
 									</Column>
-									<Column alignItems = "end">
+									<Column hAlign="End">
 										<Label text="Price" />
 									</Column>
 								</columns>
 								<items>
-									<ColumnListItem >
+									<ColumnListItem vAlign="Middle">
 										<cells>
 											<Text text="{item>PurchaseOrderItem}" />
 											<Text text="{item>PurchaseOrderItemText}" />
-											<Text text="{item>OrderQuantity} {item>OrderPriceUnit}" />
-											<Text text="{item>NetPriceAmount} {item>DocumentCurrency}" />
+											<ObjectNumber number="{item>OrderQuantity}" unit="{item>OrderPriceUnit}"  />
+											<ObjectNumber number="{item>NetPriceAmount}" unit="{item>DocumentCurrency}" />
 										</cells>
 									</ColumnListItem>
 								</items>
