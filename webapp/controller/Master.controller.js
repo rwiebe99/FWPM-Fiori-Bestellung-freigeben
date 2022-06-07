@@ -99,11 +99,20 @@ function (Controller, Device , JSONModel, Filter, Sorter, FilterOperator, GroupH
             var params = oEvent.getParameters(),
                 path,
                 desc,
-                sorter = [];
+				path1,
+                desc1,
+                sorter = [],
+				filter = [];
             path = params.sortItem.getKey();
             desc = params.sortDescending;
+			path1 = params.filterItems[0].mProperties.key ;
+            
             sorter.push(new sap.ui.model.Sorter(path, desc));
+			filter.push(new sap.ui.model.Filter('PurchasingDocumentDeletionCode',sap.ui.model.FilterOperator.Contains, path1));
             this.byId("list").getBinding("items").sort(sorter);
+			var oList = this.getView().byId("list");
+			var oBinding = oList.getBinding("items");
+			oBinding.filter(filter);
         }
 	});
 });
