@@ -15,7 +15,7 @@
             <items>
                 <ViewSettingsItem text="Akzeptiert" key="A" />
                 <ViewSettingsItem text="Abgelehnt" key="X" />
-                <ViewSettingsItem text="Offen" key=" " selected="true"/>
+                <ViewSettingsItem text="Offen" key="" selected="true"/>
             </items>
         </ViewSettingsFilterItem>
         </filterItems>
