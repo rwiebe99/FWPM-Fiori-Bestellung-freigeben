@@ -7,13 +7,7 @@
 	xmlns:mvc="sap.ui.core.mvc" controllerName="acceptpurchaseorder.controller.Detail">
 	<Page title="" navButtonPress="onNavBack" showNavButton="{device>/system/phone}">
 		<content>
-			<ObjectHeader intro="Purchase Order:" title="{data>PurchaseOrder}" icon="sap-icon://cart" number=" " numberUnit="{data>DocumentCurrency}" numberState="None" titleActive="false" backgroundDesign="Translucent" condensed="false" visible="true">
-				<attributes/>
-				<statuses>
-					<!--<ObjectStatus text="TEST" state="None" visible="true"/>-->
-				</statuses>
-				<markers/>
-			</ObjectHeader>
+			<ObjectHeader intro="Purchase Order:" title="{data>PurchaseOrder}" icon="sap-icon://cart" number=" " numberUnit="{data>DocumentCurrency}" numberState="None" titleActive="false" backgroundDesign="Translucent" condensed="false" visible="true"/>
 
 			<IconTabBar id="idIconTabBarMulti" expanded="{device>/isNoPhone}" class="sapUiResponsiveContentPadding">
 				<items>
