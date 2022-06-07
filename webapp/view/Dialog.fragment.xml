@@ -1,21 +1,23 @@
-<core:FragmentDefinition
-    xmlns="sap.m"
+<core:FragmentDefinition xmlns="sap.m"
     xmlns:core="sap.ui.core">
 
-    <ViewSettingsDialog
-        id="viewSettingsDialog"
-        confirm="handleConfirm">
+    <ViewSettingsDialog id="viewSettingsDialog" confirm="handleConfirm">
         <sortItems>
-            <ViewSettingsItem
-                text="{i18n>order}"
-                key="PurchaseOrder"
-                selected="true"/>
-                <ViewSettingsItem
-                text="{i18n>date}"
-                key="PurchaseOrderDate"
-                selected="false"/>
-
+            <ViewSettingsItem text="{i18n>order}" key="PurchaseOrder" selected="true"/>
+            <ViewSettingsItem text="{i18n>date}" key="PurchaseOrderDate" selected="false"/>
+            
         </sortItems>
-
+        <groupItems>
+			<ViewSettingsItem text="Status" key="1" />
+		</groupItems>
+        <filterItems>
+            <ViewSettingsFilterItem text="Status" key="PurchasingDocumentDeletionCode">
+            <items>
+                <ViewSettingsItem text="Akzeptiert" key="A" />
+                <ViewSettingsItem text="Abgelehnt" key="X" />
+                <ViewSettingsItem text="Offen" key=" " selected="true"/>
+            </items>
+        </ViewSettingsFilterItem>
+        </filterItems>
     </ViewSettingsDialog>
 </core:FragmentDefinition>
