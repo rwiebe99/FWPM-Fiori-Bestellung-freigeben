@@ -60,7 +60,7 @@ style.css
     Ricahrd
 
 manifest
-    Ricahrd/Khang
+    Richard/Khang/Daniel
 
 component.js
     Richard
