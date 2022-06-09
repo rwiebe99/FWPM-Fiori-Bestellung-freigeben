@@ -4,7 +4,7 @@
     <Page title="{i18n>titleList}">
         <List id="list" items="{path:'user>/d/results/',
                         sorter: 'user>PurchaseOrder'}" 
-                        mode="SingleSelectMaster" selectionChange="onSelectionChange" expandable="{device>/system/phone}" growing="false" rememberSelection="false">
+                        mode="SingleSelectMaster" selectionChange="onSelectionChange" expandable="{device>/system/phone}" growing="true" rememberSelection="false">
             <headerToolbar>
                 <OverflowToolbar>
                     <SearchField id="searchField" placeholder="Search" search=".onSearch" width="auto">
