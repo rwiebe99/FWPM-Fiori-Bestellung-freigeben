@@ -34,3 +34,33 @@
 1. Active NodeJS LTS (Long Term Support) version and associated supported NPM version.  (See https://nodejs.org)
 
 
+
+#### Aufteilung
+
+Mockup von BuildMe+ waren alle beteiligt
+
+App.controller 
+    Richard
+
+Detail.Controller 
+    JS Khang
+    Inhalt Khang
+    Übersetzung Daniel
+    Buttons Daniel
+    Button JS Daniel
+
+Master.Controller 
+    Richard
+
+i18n
+    master/dialog.fragment Ricahrd
+    Detail Daniel
++
+style.css
+    Ricahrd
+
+manifest
+    Ricahrd/Khang
+
+component.js
+    Richard
