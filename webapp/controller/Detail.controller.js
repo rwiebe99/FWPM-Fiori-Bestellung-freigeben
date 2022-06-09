@@ -44,7 +44,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/routing/History", "sap
 			this.getView().setModel(oModel, "notes");
 
 		},
-		
+
 		loadData: function (sPath) {
 
 			return new Promise(function (resolve, reject) {
@@ -92,82 +92,96 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/routing/History", "sap
 		},
 
 		_onButtonPressAccept: function () {
+			var buttonModel = this.getView().getModel("button");
 
-			sap.m.MessageBox.information("Sind Sie sich sicher, dass sie den Auftrag " + orderNumber + " freigeben möchten?", {
-				title: "Information",                                                                       
-				styleClass: "",                                      
-				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],              
-				emphasizedAction: sap.m.MessageBox.Action.YES,        
-				initialFocus: null,                                
-				textDirection: sap.ui.core.TextDirection.Inherit,    
+			sap.m.MessageBox.information("Sind Sie sich sicher, dass Richard stinkt?", {
+				title: "Information",                                                                       // default
+				styleClass: "",                                      // default
+				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],              // default
+				emphasizedAction: sap.m.MessageBox.Action.YES,        // default
+				initialFocus: null,                                  // default
+				textDirection: sap.ui.core.TextDirection.Inherit,     // default
 				onClose: function (oAction) {
 					if (oAction == sap.m.MessageBox.Action.YES) {
 
 						//Serverübergabe callback
+						buttonModel.callFunction("/Release", {
+							method: "POST",
+							success: function (oData, response) {
+								if (oData.success === true) {
 
-						sap.m.MessageBox.confirm("Der Auftrag " + orderNumber + " wurde erfolgreich freigegeben", {
-							title: "Confirm",                                   
-							onClose: null,                                    
-							styleClass: "",                                   
-							actions: [sap.m.MessageBox.Action.OK],        
-							emphasizedAction: sap.m.MessageBox.Action.OK,   
-							initialFocus: null,                                  
-							textDirection: sap.ui.core.TextDirection.Inherit     
+									sap.m.MessageBox.success("Der Auftrag " + orderNumber + " wurde erfolgreich abgelehnt", {
+										title: "Confirm",                                    // default
+										onClose: null,                                       // default
+										styleClass: "",                                      // default
+										actions: [sap.m.MessageBox.Action.OK],         // default
+										emphasizedAction: sap.m.MessageBox.Action.OK,        // default
+										initialFocus: null,                                  // default
+										textDirection: sap.ui.core.TextDirection.Inherit     // default
+									})
+								} else
+									sap.m.MessageBox.error("Der Auftrag " + orderNumber + " wurde nicht abgelehnt", {
+										title: "Confirm",                                    // default
+										onClose: null,                                       // default
+										styleClass: "",                                      // default
+										actions: [sap.m.MessageBox.Action.OK],         // default
+										emphasizedAction: sap.m.MessageBox.Action.OK,        // default
+										initialFocus: null,                                  // default
+										textDirection: sap.ui.core.TextDirection.Inherit     // default
+									});
+							},
+							urlParameters: {
+								Comment: "x",
+								PONumber: orderNumber
+							}
 						})
-					} else
-						sap.m.MessageBox.confirm("Der Auftrag " + orderNumber + " wurde nicht freigegeben", {
-							title: "Confirm",                                    
-							onClose: null,                                      
-							styleClass: "",                                      
-							actions: [sap.m.MessageBox.Action.OK],         
-							emphasizedAction: sap.m.MessageBox.Action.OK,        
-							initialFocus: null,                                  
-							textDirection: sap.ui.core.TextDirection.Inherit     
-						});
+
+							;
+					}
 				}
-			})
+			});
 		},
 
 		_onButtonPressDecline: function () {
 
 			sap.m.MessageBox.information("Sind Sie sich sicher, dass sie den Auftrag " + orderNumber + " ablehnen möchten?", {
-				title: "Information",                                
-				styleClass: "",                                      
-				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],             
-				emphasizedAction: sap.m.MessageBox.Action.YES,        
-				initialFocus: null,                                 
-				textDirection: sap.ui.core.TextDirection.Inherit,
+				title: "Information",                                // default
+				styleClass: "",                                      // default
+				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],              // default
+				emphasizedAction: sap.m.MessageBox.Action.YES,        // default
+				initialFocus: null,                                  // default
+				textDirection: sap.ui.core.TextDirection.Inherit,     // default
 				onClose: function (oAction) {
 					if (oAction == sap.m.MessageBox.Action.YES) {
 
 						//Serverübergabe callback
 
-						sap.m.MessageBox.confirm("Der Auftrag " + orderNumber + " wurde erfolgreich abgelehnt", {
-							title: "Confirm",                                   
-							onClose: null,                                     
-							styleClass: "",                                     
-							actions: [sap.m.MessageBox.Action.OK],         
-							emphasizedAction: sap.m.MessageBox.Action.OK,       
-							initialFocus: null,                                 
-							textDirection: sap.ui.core.TextDirection.Inherit    
+						sap.m.MessageBox.success("Der Auftrag " + orderNumber + " wurde erfolgreich abgelehnt", {
+							title: "Confirm",                                    // default
+							onClose: null,                                       // default
+							styleClass: "",                                      // default
+							actions: [sap.m.MessageBox.Action.OK],         // default
+							emphasizedAction: sap.m.MessageBox.Action.OK,        // default
+							initialFocus: null,                                  // default
+							textDirection: sap.ui.core.TextDirection.Inherit     // default
 						})
 					} else
-						sap.m.MessageBox.confirm("Der Auftrag " + orderNumber + " wurde nicht abgelehnt", {
-							title: "Confirm",                                  
-							onClose: null,                                      
-							styleClass: "",                                     
-							actions: [sap.m.MessageBox.Action.OK],         
-							emphasizedAction: sap.m.MessageBox.Action.OK,        
-							initialFocus: null,                                  
-							textDirection: sap.ui.core.TextDirection.Inherit     
+						sap.m.MessageBox.error("Der Auftrag " + orderNumber + " wurde nicht abgelehnt", {
+							title: "Confirm",                                    // default
+							onClose: null,                                       // default
+							styleClass: "",                                      // default
+							actions: [sap.m.MessageBox.Action.OK],         // default
+							emphasizedAction: sap.m.MessageBox.Action.OK,        // default
+							initialFocus: null,                                  // default
+							textDirection: sap.ui.core.TextDirection.Inherit     // default
 						});
-				}
+				},
 			});
 
 		},
 
 		onNavBack: function () {
-			var sPreviousHash = History.getInstance().getPreviousHash();			
+			var sPreviousHash = History.getInstance().getPreviousHash();
 			if (sPreviousHash !== undefined) {
 				history.go(-1);
 			} else {

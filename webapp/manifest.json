@@ -8,50 +8,64 @@
 		"description": "{{appDescription}}",
 		"resources": "resources.json",
 		"dataSources": {
-		  "mainService": {
-			"uri": "https://s4h.ososoft.de:44300/sap/opu/odata/sap/ZOSO_PURCHASEORDER/",
-			"type": "OData",
-			"settings": {
-				"odataVersion": "2.0"
+			"mainService": {
+				"uri": "https://s4h.ososoft.de:44300/sap/opu/odata/sap/ZOSO_PURCHASEORDER/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			},
+			"buttonService": {
+				"uri": "httpss4h.ososoft.de44300sapopuodataSAPZOSO_PO_UTIL_SRV",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			},
+			"i18n": {
+				"bundleName": "acceptpurchaseorder.i18n.i18n",
+				"supportedLocales": [
+					"de",
+					"en"
+				],
+				"fallbackLocale": "en"
 			}
-			
-		  }
-		},
-		"i18n": {
-			"bundleName": "acceptpurchaseorder.i18n.i18n",
-			"supportedLocales": ["de", "en"],
-			"fallbackLocale": "en"
 		}
 	},
 	"sap.ui5": {
 		"dependencies": {
 			"minUI5Version": "1.98.0"
 		},
-		
 		"rootView": {
 			"viewName": "acceptpurchaseorder.view.App",
 			"type": "XML",
 			"async": true
 		},
-		"models":{
-			"invoice":{
+		"models": {
+			"invoice": {
 				"dataSource": "mainService"
-
-				},
-				
+			},
+			"button": {
+				"dataSource": "buttonService"
+			},
 			"i18n": {
 				"type": "sap.ui.model.resource.ResourceModel",
 				"settings": {
 					"bundleName": "acceptpurchaseorder.i18n.i18n",
-					"supportedLocales": ["de", "en"],
+					"supportedLocales": [
+						"de",
+						"en"
+					],
 					"fallbackLocale": "en"
 				}
 			}
-			},
+		},
 		"resources": {
-			"css":[{
-				"uri":"css/style.css"
-			}]
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
 		},
 		"routing": {
 			"config": {
@@ -78,7 +92,6 @@
 						"orderDetails"
 					]
 				}
-				
 			],
 			"targets": {
 				"master": {
