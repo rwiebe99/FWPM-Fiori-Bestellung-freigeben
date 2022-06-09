@@ -3,7 +3,12 @@
     xmlns:mvc="sap.ui.core.mvc" controllerName="acceptpurchaseorder.controller.Master">
     <Page title="{i18n>titleList}">
         <List id="list" items="{path:'user>/d/results/',
-                        sorter: 'user>PurchaseOrder' }" 
+                        sorter: 'user>PurchaseOrder' , 
+                        filters: [{
+                          path: 'user>PurchasingDocumentDeletionCode', 
+                          operator: 'EQ', 
+                          value1: ''
+                        }]}" 
                         mode="SingleSelectMaster" selectionChange="onSelectionChange" expandable="{device>/system/phone}" growing="false" rememberSelection="false">
             <headerToolbar>
                 <OverflowToolbar>
@@ -26,9 +31,4 @@
     </Page>
 </mvc:View>
 
-<!-- , 
-                        filters: [{
-                          path: 'user>PurchasingDocumentDeletionCode', 
-                          operator: 'NE', 
-                          value1: ' '
-                        }]-->
+<!-- -->
