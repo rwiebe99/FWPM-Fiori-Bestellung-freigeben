@@ -16,7 +16,7 @@
 				}
 			},
 			"buttonService": {
-				"uri": "httpss4h.ososoft.de44300sapopuodataSAPZOSO_PO_UTIL_SRV",
+				"uri": "https://s4h.ososoft.de:44300/sap/opu/odata/SAP/ZOSO_PO_UTIL_SRV",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0"

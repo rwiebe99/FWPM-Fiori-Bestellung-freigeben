@@ -94,7 +94,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/routing/History", "sap
 		_onButtonPressAccept: function () {
 			var buttonModel = this.getView().getModel("button");
 
-			sap.m.MessageBox.information("Sind Sie sich sicher, dass Richard stinkt?", {
+			sap.m.MessageBox.information("Sind Sie sich sicher, dass der Auftrag " + orderNumber + " freigegeben werden soll", {
 				title: "Information",                                                                       // default
 				styleClass: "",                                      // default
 				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],              // default
