@@ -15,6 +15,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/routing/History", "sap
 			var oModel = new sap.ui.model.json.JSONModel(base);
 			this.getView().setModel(oModel, "data");
 			oModelItem = new sap.ui.model.json.JSONModel();
+
+			var oButton = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/SAP/ZOSO_PO_UTIL_SRV");
+			this.getView().setModel(oButton, "button");
 		},
 
 		_onRouteMatched: function (oEvent) {
@@ -93,7 +96,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/routing/History", "sap
 
 		_onButtonPressAccept: function () {
 			var buttonModel = this.getView().getModel("button");
-
+			
 			sap.m.MessageBox.information("Sind Sie sich sicher, dass der Auftrag " + orderNumber + " freigegeben werden soll", {
 				title: "Information",                                                                       // default
 				styleClass: "",                                      // default
@@ -108,7 +111,62 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/routing/History", "sap
 						buttonModel.callFunction("/Release", {
 							method: "POST",
 							success: function (oData, response) {
-								if (oData.success === true) {
+								if (oData.Release.Success === true) {
+
+									sap.m.MessageBox.success("Der Auftrag " + orderNumber + " wurde erfolgreich freigegeben", {
+										title: "Confirm",                                    // default
+										onClose: null,                                       // default
+										styleClass: "",                                      // default
+										actions: [sap.m.MessageBox.Action.OK],         // default
+										emphasizedAction: sap.m.MessageBox.Action.OK,        // default
+										initialFocus: null,                                  // default
+										textDirection: sap.ui.core.TextDirection.Inherit     // default
+									})
+								} else
+									sap.m.MessageBox.error("Der Auftrag " + orderNumber + " wurde nicht freigegeben", {
+										title: "Confirm",                                    // default
+										onClose: null,                                       // default
+										styleClass: "",                                      // default
+										actions: [sap.m.MessageBox.Action.OK],         // default
+										emphasizedAction: sap.m.MessageBox.Action.OK,        // default
+										initialFocus: null,                                  // default
+										textDirection: sap.ui.core.TextDirection.Inherit     // default
+									});
+
+									
+							},
+							urlParameters: {
+								Comment: "x",
+								PONumber: orderNumber
+							}
+						})
+
+							;
+							
+					}
+				}
+			});
+		},
+
+		_onButtonPressDecline: function () {
+
+			var buttonModel = this.getView().getModel("button");
+
+			sap.m.MessageBox.information("Sind Sie sich sicher, dass sie den Auftrag " + orderNumber + " ablehnen möchten?", {
+				title: "Information",                                // default
+				styleClass: "",                                      // default
+				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],              // default
+				emphasizedAction: sap.m.MessageBox.Action.YES,        // default
+				initialFocus: null,                                  // default
+				textDirection: sap.ui.core.TextDirection.Inherit,     // default
+				onClose: function (oAction) {
+					if (oAction == sap.m.MessageBox.Action.YES) {
+
+						//Serverübergabe callback
+						buttonModel.callFunction("/Reject", {
+							method: "POST",
+							success: function (oData, response) {
+								if (oData.Reject.Success === true) {
 
 									sap.m.MessageBox.success("Der Auftrag " + orderNumber + " wurde erfolgreich abgelehnt", {
 										title: "Confirm",                                    // default
@@ -129,6 +187,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/routing/History", "sap
 										initialFocus: null,                                  // default
 										textDirection: sap.ui.core.TextDirection.Inherit     // default
 									});
+
+									
 							},
 							urlParameters: {
 								Comment: "x",
@@ -137,44 +197,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/routing/History", "sap
 						})
 
 							;
+							
 					}
-				}
-			});
-		},
-
-		_onButtonPressDecline: function () {
-
-			sap.m.MessageBox.information("Sind Sie sich sicher, dass sie den Auftrag " + orderNumber + " ablehnen möchten?", {
-				title: "Information",                                // default
-				styleClass: "",                                      // default
-				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],              // default
-				emphasizedAction: sap.m.MessageBox.Action.YES,        // default
-				initialFocus: null,                                  // default
-				textDirection: sap.ui.core.TextDirection.Inherit,     // default
-				onClose: function (oAction) {
-					if (oAction == sap.m.MessageBox.Action.YES) {
-
-						//Serverübergabe callback
-
-						sap.m.MessageBox.success("Der Auftrag " + orderNumber + " wurde erfolgreich abgelehnt", {
-							title: "Confirm",                                    // default
-							onClose: null,                                       // default
-							styleClass: "",                                      // default
-							actions: [sap.m.MessageBox.Action.OK],         // default
-							emphasizedAction: sap.m.MessageBox.Action.OK,        // default
-							initialFocus: null,                                  // default
-							textDirection: sap.ui.core.TextDirection.Inherit     // default
-						})
-					} else
-						sap.m.MessageBox.error("Der Auftrag " + orderNumber + " wurde nicht abgelehnt", {
-							title: "Confirm",                                    // default
-							onClose: null,                                       // default
-							styleClass: "",                                      // default
-							actions: [sap.m.MessageBox.Action.OK],         // default
-							emphasizedAction: sap.m.MessageBox.Action.OK,        // default
-							initialFocus: null,                                  // default
-							textDirection: sap.ui.core.TextDirection.Inherit     // default
-						});
 				},
 			});
 

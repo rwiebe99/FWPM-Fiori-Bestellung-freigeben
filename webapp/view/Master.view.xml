@@ -20,6 +20,7 @@
             <ObjectListItem title="{user>PurchaseOrder}" icon="sap-icon://product" type="Active" press="onListItemPress">
                 <ObjectAttribute title="{i18n>created}" text="{path: 'user>PurchaseOrderDate', formatter:'.dateFormatter' }"/>
                 <ObjectAttribute title="{i18n>creator}" text="{user>CreatedByUser}"/>
+                <ObjectAttribute text="{user>PurchasingDocumentDeletionCode}"/>
             </ObjectListItem>
         </List>
     </Page>
